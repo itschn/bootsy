@@ -11,6 +11,8 @@ module Bootsy
       #
       #
       #
+      
+      helper_method :resource, :collection
   
       #
       # Concerns
@@ -105,6 +107,32 @@ module Bootsy
       #
 
       protected
+      
+      def resource_instance_name
+        :image
+      end
+      
+      def get_resource_ivar #:nodoc:
+        instance_variable_get("@#{resource_instance_name}")
+      end
+
+      # Set resource ivar based on the current resource controller.
+      #
+      def set_resource_ivar(resource) #:nodoc:
+        instance_variable_set("@#{resource_instance_name}", resource)
+      end
+      
+      def resource_collection_name
+        :images
+      end
+      
+      def get_collection_ivar #:nodoc:
+        instance_variable_get("@#{resource_collection_name}")
+      end
+
+      def set_collection_ivar(collection) #:nodoc:
+        instance_variable_set("@#{resource_collection_name}", collection)
+      end
       
       def resource
         get_resource_ivar || set_resource_ivar(parent.images.find(params[:id]))
