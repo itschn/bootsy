@@ -73,18 +73,6 @@ module Bootsy
           end
         end
       end
-  
-      def create
-        super do |success, failure|      
-          success.html do
-            render json: [resource_fileupload_response_hash].to_json, content_type: 'text/html', layout: false
-          end
-          success.json do
-            render json: { files: [resource_fileupload_response_hash] }, status: :created
-          end
-
-        end
-      end
       
       def destroy
         resource.destroy
