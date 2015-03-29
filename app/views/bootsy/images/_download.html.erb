@@ -16,7 +16,7 @@
         {% if (file.thumb_url) { %}
           <div class="bootsy-image dropdown col-sm-2">
             <%= link_to '#', class: :preview, data: { toggle: 'dropdown' } do %>
-              <img src="{%=file.thumb_url%}"></img>
+              <img src="{%=file.thumb_url%}" alt="Tiny_"></img>
             <% end %>
 
             <ul class="dropdown-menu" role="menu">
