@@ -2,95 +2,157 @@ require_dependency 'bootsy/application_controller'
 
 module Bootsy
   class ImagesController < Bootsy::ApplicationController
-    before_action :set_gallery, only: [:index, :create]
+    class Bootsy::ImagesController < ApplicationController
+  
+      #
+      # Settings
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+  
+      #
+      # Concerns
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
 
-    def index
-      @images = @gallery.images
+      #
+      # Filter
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+  
+      before_action :persist_gallery!, only: :create
 
-      respond_to do |format|
-        format.html # index.html.erb
-
-        format.json do
-          render json: {
-            images: @images.map { |image| image_markup(image) },
-            form: new_image_markup(@gallery)
-          }
-        end
-      end
-    end
-
-    def create
-      @gallery.save!
-      @image = @gallery.images.new(image_params)
-
-      create_and_respond
-    end
-
-    def destroy
-      @image = Image.find(params[:id])
-      @image.destroy
-
-      respond_to do |format|
-        format.json do
-          render json: { id: params[:id] }
-        end
-
-        format.html { redirect_to images_url }
-      end
-    end
-
-    private
-
-    def set_gallery
-      @gallery = ImageGallery.find(params[:image_gallery_id])
-    end
-
-    # Private: Returns the String markup to render
-    # an image in the gallery modal.
-    #
-    # image - The `Bootsy::Image` instance that will
-    #         be rendered.
-    def image_markup(image)
-      render_to_string(
-        file: 'bootsy/images/_image',
-        formats: [:html],
-        locals: { image: image }
-      )
-    end
-
-    # Private: Returns the String markup to render
-    # a form to upload a new image in a given gallery.
-    #
-    # gallery - The `Bootsy::ImageGallery` instance which
-    #           the image will be uploaded to.
-    def new_image_markup(gallery)
-      render_to_string(
-        file: 'bootsy/images/_new',
-        formats: [:html],
-        locals: { gallery: gallery, image: gallery.images.new }
-      )
-    end
-
-    def image_params
-      params.require(:image).permit(:image_file, :remote_image_file_url)
-    end
-
-    def create_and_respond
-      respond_to do |format|
-        if @image.save
+      #
+      # Plugins
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+      
+      inherited_resources
+      
+      actions :create, :index, :destroy
+  
+      #
+      # Actions
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+  
+      def index
+        respond_to do |format|
+          format.html
           format.json do
             render json: {
-              image: image_markup(@image),
-              form: new_image_markup(@gallery),
-              gallery_id: @gallery.id
+              images: collection.map { |image| render_to_string(file: 'bootsy/images/_image', formats: [:html],locals: { image: image }, layout: false) },
+              form: render_to_string(file: 'bootsy/images/index', formats: [:html], locals: { gallery: parent, image: parent.images.new }, layout: false)
             }
-          end
-        else
-          format.json do
-            render json: @image.errors, status: :unprocessable_entity
           end
         end
       end
+  
+      def create
+        super do |success, failure|      
+          success.html do
+            render json: [resource_fileupload_response_hash].to_json, content_type: 'text/html', layout: false
+          end
+          success.json do
+            render json: { files: [resource_fileupload_response_hash] }, status: :created
+          end
+          failure.html { render action: :index }
+          failure.json { render json: { files: [error: resource.errors.full_messages.join('<br>'), name: original_filename] } }
+        end
+      end
+      
+      def destroy
+        resource.destroy
+
+        respond_to do |format|
+          format.json do
+            render json: { id: params[:id] }
+          end
+
+          format.html { redirect_to images_url }
+        end
+      end
+  
+      #
+      # Protected
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+
+      protected
+      
+      def resource
+        get_resource_ivar || set_resource_ivar(parent.images.find(params[:id])
+      end
+  
+      def parent
+        @gallery ||= Bootsy::ImageGallery.find(params[:image_gallery_id])
+      end
+  
+      def collection
+        get_collection_ivar || set_collection_ivar(parent.images)
+      end
+  
+      def persist_gallery!
+        parent.save!
+      end
+  
+      def build_resource
+        get_resource_ivar || set_resource_ivar(parent.images.build(permitted_params[resource_instance_name]))
+      end
+
+      #
+      # Private
+      # ---------------------------------------------------------------------------------------
+      #
+      #
+      #
+      #
+
+      private
+  
+      def permitted_params    
+        params.permit(resource_instance_name => [:image_file])
+      end
+  
+      def resource_fileupload_response_hash    
+        resource_fileupload_response_hash = {
+          name: resource.image_file.filename,
+          icon_class: mimetype_icon_css_class(resource.image_file.content_type),
+          thumb_url: resource.image_file.url(:tiny),
+          content_type: resource.image_file.content_type,
+          size: resource.image_file.size,
+          url: resource.image_file.url(:tiny),
+          resource_url: polymorphic_url([current_namespace, current_parent, resource], locale: I18n.locale),
+          identifier: ActionController::Base.helpers.dom_id(resource, :row)
+        }.stringify_keys
+    
+        resource_fileupload_response_hash
+      end
+      
+      def original_filename
+        if params[resource_instance_name] && params[resource_instance_name][:image_file]
+          sanitized_file = CarrierWave::SanitizedFile.new(params[resource_instance_name][:image_file])
+          sanitized_file.original_filename
+        end
+      end
+
     end
   end
 end

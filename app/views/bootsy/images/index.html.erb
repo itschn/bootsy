@@ -1,0 +1,25 @@
+<%= form_for [bootsy, resource_or_nil(gallery), image], html: { multipart: true, data: { fileupload: true } } do |f| %>
+  <div class="fileupload-loading"></div>
+  <br>
+  <!-- The table listing the files available for upload/download -->
+  <div class="panel panel-default">
+    <div class="panel-heading text-right">
+      <span class="btn btn-primary btn-xs fileinput-button">
+        <%= content_tag(:span, nil, class: 'fa fa-paperclip') %>
+        <%= f.file_field :image_file %>
+      </span>
+    </div>
+    <div class="table-responsive overflow">
+      <table class="table table-borderless table-striped table-hover vmiddle">
+        <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+          <%= render collection %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :footer, flush: true do %>
+  <%= render 'upload' %>
+  <%= render 'download' %>
+<% end %>

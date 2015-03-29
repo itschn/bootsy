@@ -1,18 +1,15 @@
-<div class="modal fade bootsy-modal"
-  data-no-turbolink
-  data-gallery-id="<%= container.bootsy_image_gallery_id %>">
+<div class="modal fade bootsy-modal" data-no-turbolink data-gallery-id="<%= container.bootsy_image_gallery_id %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">&times;</span>
         </button>
-
         <h4 class="modal-title"><%= t 'bootsy.image.p' %></h4>
       </div>
 
       <div class="modal-body">
-        <div class="alert alert-info bootsy-empty-alert">
+        <!-- <div class="alert alert-info bootsy-empty-alert">
           <%= t 'bootsy.no_images_uploaded' %>
         </div>
 
@@ -20,7 +17,7 @@
 
         <%= image_tag 'bootsy/gallery-loader.gif', class: 'bootsy-gallery-loader' %>
 
-        <%= refresh_btn %>
+        <%= refresh_btn %> -->
       </div>
 
       <div class="modal-footer">

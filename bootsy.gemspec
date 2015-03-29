@@ -5,7 +5,7 @@ require 'bootsy/version'
 Gem::Specification.new do |s|
   s.name        = 'bootsy'
   s.version     = Bootsy::VERSION
-  s.authors     = ['Volmer Soares']
+  s.authors     = ['Volmer Soares' 'Michael Rüffer']
   s.email       = ['volmerius@gmail.com']
   s.homepage    = 'http://github.com/volmer/bootsy'
   s.summary     = 'A beautiful WYSIWYG editor with image uploads for Rails.'
@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick', '~> 4.0'
   s.add_dependency 'carrierwave', '~> 0.10'
   s.add_dependency 'remotipart', '~> 1.2'
+  s.add_dependency 'inherited_resources', '~> 1.6'
 end

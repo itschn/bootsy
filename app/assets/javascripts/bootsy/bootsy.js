@@ -88,19 +88,20 @@ Bootsy.Area.prototype.hideRefreshButton = function() {
 
 // Set upload form
 Bootsy.Area.prototype.setUploadForm = function(html) {
-  this.find('.modal-footer').html(html);
-
-  this.hideUploadLoadingAnimation();
-
-  this.find('.bootsy-upload-form input[type="file"]').bootstrapFileInput();
-
-  this.uploadInput = this.find('.bootsy-upload-form input[type="file"]');
-
-  this.uploadInput.change(function() {
-    this.showUploadLoadingAnimation();
-
-    this.uploadInput.closest('form').submit();
-  }.bind(this));
+  // this.find('.modal-footer').html(html);
+  this.find('.modal-body').html(html);
+  Fileupload.init();
+  // this.hideUploadLoadingAnimation();
+  //
+  // this.find('.bootsy-upload-form input[type="file"]').bootstrapFileInput();
+  //
+  // this.uploadInput = this.find('.bootsy-upload-form input[type="file"]');
+  //
+  // this.uploadInput.change(function() {
+  //   this.showUploadLoadingAnimation();
+  //
+  //   this.uploadInput.closest('form').submit();
+  // }.bind(this));
 };
 
 // The image upload failed
