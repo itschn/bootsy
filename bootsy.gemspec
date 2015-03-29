@@ -18,5 +18,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick', '~> 4.0'
   s.add_dependency 'carrierwave', '~> 0.10'
   s.add_dependency 'remotipart', '~> 1.2'
-  s.add_dependency 'inherited_resources', '~> 1.6'
 end

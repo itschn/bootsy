@@ -7,6 +7,8 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'sqlite3'
 gem 'simple_form'
+gem 'inherited_resources'
+gem 'jquery-fileupload-rails'
 
 gemspec
 
