@@ -2,31 +2,7 @@
   {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade" id="{%=file.identifier%}"> 
       {% if (file.error) { %}
-      <td>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation" class="dropdown-header"><%= t 'bootsy.image.size' %></li>
-
-          <% Bootsy.image_versions_available.each do |size| %>
-            <li role="presentation" class="dropdown dropdown-submenu">
-              <%= link_to '#', tabindex: '-1', role: 'menuitem', data: { toggle: 'dropdown' } do %>
-                <i class="icon-picture"></i>
-
-                <%= t size, scope: 'bootsy.image' %>
-              <% end %>
-
-              <ul class="dropdown-menu" role="menu">
-                <% [:left, :right, :inline].each do |position| %>
-                  <li role="presentation">
-                    <%= link_to '#', class: 'insert', tabindex: '-1', role: 'menuitem', data: { image_size: size.to_s, position: position.to_s} do %>
-                      <%= t position, scope: 'bootsy.image.position' %>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          <% end %>
-        </ul>
-      </td>
+      <td><div class="preview"></div></td>
       <td class="name">
         <span class="text-danger"><i class="fa fa-exclamation-circle"></i>{%=locale.fileupload.errors[file.error] || file.error%}</span>
       </td>
@@ -36,11 +12,41 @@
         </button>
       </td>
       {% } else { %}
-      <td class="preview">
+      <td>
         {% if (file.thumb_url) { %}
-        <img src="{%=file.thumb_url%}"></img>
+          <div class="bootsy-image dropdown col-sm-2">
+            <%= link_to '#', class: :preview, data: { toggle: 'dropdown' } do %>
+              <img src="{%=file.thumb_url%}"></img>
+            <% end %>
+
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" class="dropdown-header"><%= t 'bootsy.image.size' %></li>
+
+              <% Bootsy.image_versions_available.each do |size| %>
+                <li role="presentation" class="dropdown dropdown-submenu">
+                  <%= link_to '#', tabindex: '-1', role: 'menuitem', data: { toggle: 'dropdown' } do %>
+                    <i class="icon-picture"></i>
+
+                    <%= t size, scope: 'bootsy.image' %>
+                  <% end %>
+
+                  <ul class="dropdown-menu" role="menu">
+                    <% [:left, :right, :inline].each do |position| %>
+                      <li role="presentation">
+                        <%= link_to '#', class: 'insert', tabindex: '-1', role: 'menuitem', data: { image_size: size.to_s, position: position.to_s} do %>
+                          <%= t position, scope: 'bootsy.image.position' %>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         {% } else { %}
-        <i class="{%=file.icon_class || 'fa fa-file'%}"></i>
+          <div class="bootsy-image dropdown col-sm-2">
+            <i class="{%=file.icon_class || 'fa fa-file'%}"></i>
+          </div>
         {% } %}
       </td>
       <td class="name"><span>{%=file.name%}</span></td>
