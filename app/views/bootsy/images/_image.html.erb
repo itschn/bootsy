@@ -25,18 +25,15 @@
             </ul>
           </li>
         <% end %>
-
-        <% if Bootsy.allow_destroy %>
-          <li role="presentation" class="divider"></li>
-
-          <li role="presentation">
-            <%= link_to [image.image_gallery, image], method: :delete, remote: true, data: { confirm: t('bootsy.image.confirm.destroy'), type: 'json' }, tabindex: '-1', role: 'menuitem', class: 'destroy-btn' do %>
-              <i class="icon-trash"></i>
-              <%= t('bootsy.action.destroy') %>
-            <% end %>
-          </li>
-        <% end %>
       </ul>
     </div>
+  </td>
+  <td class="name"><%= image.image_file.try(:file).try(:filename) %></td>
+  <td>
+    <% if Bootsy.allow_destroy %>
+      <%= link_to ink_to [image.image_gallery, image], method: :delete, remote: true, data: { type: 'json' } class: 'btn btn-danger btn-xs btn-fileupload-delete' do do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    <% end %>
   </td>
 <% end if image.persisted? %>
