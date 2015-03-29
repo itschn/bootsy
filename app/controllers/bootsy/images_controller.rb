@@ -38,7 +38,7 @@ module Bootsy
       #
       #
       
-      inherited_resources
+      inherit_resources
       
       actions :create, :index, :destroy
   
