@@ -1,0 +1,36 @@
+<script id="template-download" type="text/x-tmpl">
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade" id="{%=file.identifier%}"> 
+      {% if (file.error) { %}
+      <td class="preview"></td>
+      <td class="name">
+        <span class="text-danger"><i class="fa fa-exclamation-circle"></i>{%=locale.fileupload.errors[file.error] || file.error%}</span>
+      </td>
+      <td class="delete">
+        <button class="btn btn-danger btn-xs btn-fileupload-delete" data-type="DELETE" data-url="{%=file.resource_url%}">
+          <%= content_tag(:span, nil,  class: 'fa action-icon fa-trash') %>
+        </button>
+      </td>
+      {% } else { %}
+      <td class="preview">
+        {% if (file.thumb_url) { %}
+        <img src="{%=file.thumb_url%}"></img>
+        {% } else { %}
+        <i class="{%=file.icon_class || 'fa fa-file'%}"></i>
+        {% } %}
+      </td>
+      <td class="name"><span>{%=file.name%}</span></td>
+      <td>
+        {% if (file.add_to_background_url) { %}
+        <a class="btn btn-default btn-xs" rel="nofollow" data-method="patch" href="{%=file.add_to_background_url%}">
+          <i class="fa fa-plus-square-o"></i>
+        </a>
+        {% } %}
+        <a class="btn btn-danger btn-xs btn-fileupload-delete" data-type="DELETE" data-remote="true" rel="nofollow" data-method="delete" href="{%=file.resource_url%}">
+          <span class="fa action-icon fa-trash"></span>
+        </a>
+      </td>
+      {% } %}
+    </tr>
+    {% } %}
+</script>
