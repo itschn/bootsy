@@ -25,6 +25,8 @@ Fileupload.init = function() {
     limitConcurrentUploads: 0,
     disableVideoPreview: true,
     disableImagePreview: true,
+    uploadTemplateId: 'bootsy-template-upload',
+    downloadTemplateId: 'bootsy-template-download',
     progress: function(e, data) {
       var progress;
       if (data.context) {
