@@ -241,7 +241,7 @@ Bootsy.Area.prototype.init = function() {
         img = $(this).parents('.bootsy-image').find('img');
 
         imageObject = {
-          src: img.attr('src').replace('/tiny', imagePrefix),
+          src: img.attr('src').replace('/tiny_', imagePrefix),
           alt: img.attr('alt').replace('Tiny_', '')
         };
 
