@@ -37,10 +37,6 @@ module Bootsy
       #
       #
       #
-      
-      inherit_resources
-      
-      actions :create, :index, :destroy
   
       #
       # Actions
@@ -61,6 +57,20 @@ module Bootsy
           end
         end
       end
+      
+      def create(options={}, &block)
+        object = build_resource
+        
+        respond_to do |format|
+          if object.save
+            format.html { render json: [resource_fileupload_response_hash].to_json, content_type: 'text/html', layout: false }
+            format.json { render json: { files: [resource_fileupload_response_hash] }, status: :created }
+          else
+            format.html { render action: :index }
+            format.json { render json: { files: [error: resource.errors.full_messages.join('. '), name: original_filename] } }
+          end
+        end
+      end
   
       def create
         super do |success, failure|      
@@ -70,8 +80,7 @@ module Bootsy
           success.json do
             render json: { files: [resource_fileupload_response_hash] }, status: :created
           end
-          failure.html { render action: :index }
-          failure.json { render json: { files: [error: resource.errors.full_messages.join('<br>'), name: original_filename] } }
+
         end
       end
       
