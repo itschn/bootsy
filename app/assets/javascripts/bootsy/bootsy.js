@@ -271,9 +271,9 @@ Bootsy.Area.prototype.init = function() {
 
       this.modal.on('click', 'a[href="#refresh-gallery"]', this.setImageGallery.bind(this));
 
-      this.modal.on('ajax:before', '.destroy-btn', this.showGalleryLoadingAnimation.bind(this));
+      // this.modal.on('ajax:before', '.destroy-btn', this.showGalleryLoadingAnimation.bind(this));
 
-      this.modal.on('ajax:success', '.destroy-btn', function(evt, data) {
+      this.modal.on('ajax:success', '.btn-fileupload-delete', function(evt, data) {
         this.deleteImage(data.id);
       }.bind(this));
 
