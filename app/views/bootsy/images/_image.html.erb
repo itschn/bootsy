@@ -31,7 +31,7 @@
   <td class="name"><%= image.image_file.try(:file).try(:filename) %></td>
   <td>
     <% if Bootsy.allow_destroy %>
-      <%= link_to ink_to [image.image_gallery, image], method: :delete, remote: true, data: { type: 'json' } class: 'btn btn-danger btn-xs btn-fileupload-delete' do do %>
+      <%= link_to ink_to [image.image_gallery, image], method: :delete, remote: true, data: { type: 'json' }, class: 'btn btn-danger btn-xs btn-fileupload-delete' do %>
         <i class="fa fa-trash"></i>
       <% end %>
     <% end %>
