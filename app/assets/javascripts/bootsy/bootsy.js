@@ -90,7 +90,7 @@ Bootsy.Area.prototype.hideRefreshButton = function() {
 Bootsy.Area.prototype.setUploadForm = function(html) {
   // this.find('.modal-footer').html(html);
   this.find('.modal-body').html(html);
-  Fileupload.init();
+  BootsyFileupload.init();
   // this.hideUploadLoadingAnimation();
   //
   // this.find('.bootsy-upload-form input[type="file"]').bootstrapFileInput();

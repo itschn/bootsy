@@ -9,9 +9,9 @@
 //= require bootsy/translations
 
 
-window.Fileupload = window.Fileupload || {};
+window.BootsyFileupload = window.BootsyFileupload || {};
 
-Fileupload.init = function() {
+BootsyFileupload.init = function() {
   var fails, fileCount, filesToUpload, reloadPage, successes;
   filesToUpload = 0;
   fileCount = 0;
