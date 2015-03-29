@@ -241,8 +241,8 @@ Bootsy.Area.prototype.init = function() {
         img = $(this).parents('.bootsy-image').find('img');
 
         imageObject = {
-          src: img.attr('src').replace('/thumb_', imagePrefix),
-          alt: img.attr('alt').replace('Thumb_', '')
+          src: img.attr('src').replace('/tiny', imagePrefix),
+          alt: img.attr('alt').replace('Tiny_', '')
         };
 
         imageObject.align = $(this).data('position');
