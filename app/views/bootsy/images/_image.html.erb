@@ -1,6 +1,6 @@
-<%= content_tag :tr, id: dom_id(image, :row) do %>
+<%= content_tag :tr, id: dom_id(image, :row), data: { id: image.id } do %>
   <td class="preview">
-    <div class="bootsy-image dropdown col-sm-2" data-id="<%= image.id %>">
+    <div class="bootsy-image dropdown col-sm-2">
       <%= link_to image_tag(image.image_file.url(:tiny)), '#', class: 'thumbnail', data: { toggle: 'dropdown' } %>
 
       <ul class="dropdown-menu" role="menu">

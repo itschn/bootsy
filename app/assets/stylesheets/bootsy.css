@@ -306,7 +306,7 @@ textarea.bootsy:required:invalid {
 }
 
 .bootsy-image {
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
 }
 
 .bootsy-upload-loader {
