@@ -24,6 +24,7 @@
                 "<a class='btn btn-default " + size + "' data-wysihtml5-command='bold' title='CTRL+B' tabindex='-1'>" + locale.emphasis.bold + "</a>" +
                 "<a class='btn btn-default " + size + "' data-wysihtml5-command='italic' title='CTRL+I' tabindex='-1'>" + locale.emphasis.italic + "</a>" +
                 "<a class='btn btn-default " + size + "' data-wysihtml5-command='underline' title='CTRL+U' tabindex='-1'>" + locale.emphasis.underline + "</a>" +
+                "<a class='btn btn-default " + size + "' data-wysihtml5-command='formatInline' data-wysihtml5-command-value='code' tabindex='-1'>" + locale.emphasis.code + "</a>" +
               "</div>" +
             "</li>";
         },
@@ -445,6 +446,7 @@
                 "h1": {},
                 "h2": {},
                 "h3": {},
+                "code": {},
                 "blockquote": {},
                 "u": 1,
                 "img": {
@@ -466,8 +468,6 @@
                 },
                 "span": 1,
                 "div": 1,
-                // to allow save and edit files with code tag hacks
-                "code": 1,
                 "pre": 1
             }
         },
@@ -491,7 +491,8 @@
             emphasis: {
                 bold: "Bold",
                 italic: "Italic",
-                underline: "Underline"
+                underline: "Underline",
+                code: "Code"
             },
             lists: {
                 unordered: "Unordered list",
