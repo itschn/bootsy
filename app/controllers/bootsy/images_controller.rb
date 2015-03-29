@@ -98,7 +98,7 @@ module Bootsy
       protected
       
       def resource
-        get_resource_ivar || set_resource_ivar(parent.images.find(params[:id])
+        get_resource_ivar || set_resource_ivar(parent.images.find(params[:id]))
       end
   
       def parent
