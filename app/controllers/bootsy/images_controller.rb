@@ -139,7 +139,7 @@ module Bootsy
           content_type: resource.image_file.content_type,
           size: resource.image_file.size,
           url: resource.image_file.url(:tiny),
-          resource_url: polymorphic_url([current_namespace, current_parent, resource], locale: I18n.locale),
+          resource_url: polymorphic_url([:bootsy, parent, resource], locale: I18n.locale),
           identifier: ActionController::Base.helpers.dom_id(resource, :row)
         }.stringify_keys
     
