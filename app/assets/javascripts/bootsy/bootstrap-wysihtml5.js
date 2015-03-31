@@ -143,6 +143,10 @@
                     $('li.dropdown').removeClass('open');
                 }
             });
+            
+            $(el.contentWindow).on('keyup', function() {
+              $(el).style.height = (25+$(el.contentWindow).scrollHeight)+"px";
+            });
         });
     };
 
