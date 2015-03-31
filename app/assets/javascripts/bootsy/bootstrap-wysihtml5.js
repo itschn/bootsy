@@ -144,6 +144,8 @@
                 }
             });
             
+            
+            console.log(el);
             console.log(el.contentWindow);
             
             $(el.contentWindow).on('keyup', function() {
