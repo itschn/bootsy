@@ -165,6 +165,17 @@
                     editor.on(eventName, options.events[eventName]);
                 }
             }
+            
+            var resizeIframe = function() {
+                editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px";
+            }
+
+            editor.on("load", function() {
+              editor.composer.element.addEventListener("keyup", resizeIframe, false)
+              editor.composer.element.addEventListener("blur", resizeIframe, false)
+              editor.composer.element.addEventListener("focus", resizeIframe, false)
+            })
+            
             return editor;
         },
 
