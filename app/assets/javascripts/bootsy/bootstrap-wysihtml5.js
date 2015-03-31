@@ -144,6 +144,8 @@
                 }
             });
             
+            console.log(el.contentWindow);
+            
             $(el.contentWindow).on('keyup', function() {
               $(el).style.height = (25+$(el.contentWindow).scrollHeight)+"px";
             });
