@@ -32,7 +32,9 @@ var wysihtml5 = {
   ESCAPE_KEY:     27,
   SPACE_KEY:      32,
   DELETE_KEY:     46
-};/**
+};
+
+/**
  * @license Rangy, a cross-browser JavaScript range and selection library
  * http://code.google.com/p/rangy/
  *
@@ -9473,10 +9475,6 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
           this.toolbar = new wysihtml5.toolbar.Toolbar(this, this.config.toolbar);
         }
       });
-
-      // try {
-      //   console.log("Heya! This page is using wysihtml5 for rich text editing. Check out https://github.com/xing/wysihtml5");
-      // } catch(e) {}
     },
 
     isCompatible: function() {

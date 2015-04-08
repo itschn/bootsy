@@ -5,7 +5,6 @@ window.Bootsy = window.Bootsy || {};
 Bootsy.Area = function($el) {
   this.$el            = $el;
   this.modal          = $el.siblings('.bootsy-modal');
-  this.unsavedChanges = false;
   this.locale         = $el.data('bootsy-locale') || $('html').attr('lang');
   if (!Bootsy.translations[this.locale]) {
     this.locale = 'en';
@@ -17,7 +16,9 @@ Bootsy.Area = function($el) {
     image: $el.data('bootsy-image'),
     uploader: $el.data('bootsy-uploader'),
   };
-
+  
+  Bootsy.unsavedChanges = false;
+  
   // Set default values to editor options
   if ($el.data('bootsy-font-styles') === false) {
     this.options['font-styles'] = false;
@@ -200,7 +201,7 @@ Bootsy.Area.prototype.openImagesModal = function(editor) {
 
 // Alert for unsaved changes
 Bootsy.Area.prototype.unsavedChangesAlert = function () {
-  if (this.unsavedChanges) {
+  if (Bootsy.unsavedChanges) {
     return Bootsy.translations[this.locale].alertUnsaved;
   }
 };
@@ -268,22 +269,6 @@ Bootsy.Area.prototype.init = function() {
 
       // In order to avoid form nesting
       this.modal.parents('form').after(this.modal);
-
-      this.modal.on('click', 'a[href="#refresh-gallery"]', this.setImageGallery.bind(this));
-
-      // this.modal.on('ajax:before', '.destroy-btn', this.showGalleryLoadingAnimation.bind(this));
-
-      this.modal.on('ajax:success', '.btn-fileupload-delete', function(evt, data) {
-        this.deleteImage(data.id);
-      }.bind(this));
-
-      this.modal.on('ajax:error', '.bootsy-upload-form', this.imageUploadFailed.bind(this));
-
-      this.modal.on('ajax:success', '.bootsy-upload-form', function(evt, data) {
-        this.setImageGalleryId(data.gallery_id);
-        this.addImage(data.image);
-        this.setUploadForm(data.form);
-      }.bind(this));
     }
 
     this.editor = this.$el.wysihtml5($.extend(Bootsy.options, this.options)).data('wysihtml5').editor;
@@ -294,13 +279,13 @@ Bootsy.Area.prototype.init = function() {
     }
 
     this.$el.closest('form').submit(function() {
-      this.unsavedChanges = false;
+      Bootsy.unsavedChanges = false;
 
       return true;
     }.bind(this));
 
     this.editor.on('change', function() {
-      this.unsavedChanges = true;
+      Bootsy.unsavedChanges = true;
     }.bind(this));
 
     this.modal.modal({ show: false });
