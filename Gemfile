@@ -9,10 +9,6 @@ gem 'sqlite3'
 gem 'simple_form'
 gem 'jquery-fileupload-rails'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-underscore'
-end
-
 gemspec
 
 # Development dependencies

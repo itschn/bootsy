@@ -7,7 +7,6 @@ PATH
 
 GEM
   remote: http://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -151,7 +150,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.0)
       sprockets-rails
-    rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.6)
@@ -261,7 +259,6 @@ DEPENDENCIES
   jquery-rails
   pry-rails
   rails (= 4.2.0)
-  rails-assets-underscore!
   rspec-rails
   rubocop
   sass-rails
