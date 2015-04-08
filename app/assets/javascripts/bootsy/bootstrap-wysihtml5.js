@@ -166,24 +166,9 @@
                 }
             }
             
-            var source = $(this.el[0]);
-            var parsedHeight = parseInt(source.css('line-height')) * parseInt(source.attr('rows'));
-            var defocusHeight = 165;
-            var minimumHeight = (defocusHeight < parsedHeight ? parsedHeight : defocusHeight)
-            var resizeIframe = function() {
-                editor.composer.iframe.style.height = (minimumHeight < editor.composer.element.scrollHeight ? editor.composer.element.scrollHeight : minimumHeight) + "px";
-            }
-            var resetIframeSize = function() {
-                editor.composer.iframe.style.height = defocusHeight + "px";
-            }
-
-            editor.on("load", function() {
-                // editor.composer.element.addEventListener("keyup", resizeIframe, false)
-                editor.composer.element.addEventListener("blur", resizeIframe, false)
-                editor.composer.element.addEventListener("focus", resizeIframe, false)
-                // editor.composer.element.addEventListener("scroll", resizeIframe, false)
-                // editor.composer.element.addEventListener("focusout", resetIframeSize, false)
-            })
+            editor.observe("load", function () {
+              $(this.composer.iframe).autoResize();
+            });
             
             return editor;
         },
