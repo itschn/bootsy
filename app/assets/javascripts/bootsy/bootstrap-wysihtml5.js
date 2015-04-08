@@ -167,7 +167,7 @@
             }
             
             editor.observe("load", function () {
-              $(this.composer.iframe).autoResize();
+              $(editor.composer.iframe).autoResize();
             });
             
             return editor;
