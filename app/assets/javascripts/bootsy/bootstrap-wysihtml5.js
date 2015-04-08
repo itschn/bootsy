@@ -178,11 +178,11 @@
             }
 
             editor.on("load", function() {
-                editor.composer.element.addEventListener("keyup", resizeIframe, false)
+                // editor.composer.element.addEventListener("keyup", resizeIframe, false)
                 editor.composer.element.addEventListener("blur", resizeIframe, false)
                 editor.composer.element.addEventListener("focus", resizeIframe, false)
-                editor.composer.element.addEventListener("scroll", resizeIframe, false)
-                editor.composer.element.addEventListener("focusout", resetIframeSize, false)
+                // editor.composer.element.addEventListener("scroll", resizeIframe, false)
+                // editor.composer.element.addEventListener("focusout", resetIframeSize, false)
             })
             
             return editor;
