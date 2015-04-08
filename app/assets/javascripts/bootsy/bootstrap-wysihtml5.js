@@ -159,8 +159,6 @@
             options.toolbar = this.toolbar[0];
 
             var editor = new wysi.Editor(this.el[0], options);
-            var source = $(this.el[0]);
-            var minimumHeight = parseInt(source.css('line-height')) * parseInt(source.attr('rows'));
 
             if(options && options.events) {
                 for(var eventName in options.events) {
@@ -168,12 +166,15 @@
                 }
             }
             
+            var source = $(this.el[0]);
+            var parsedHeight = parseInt(source.css('line-height')) * parseInt(source.attr('rows'));
+            var defocusHeight = 165;
+            var minimumHeight = (defocusHeight < parsedHeight ? parsedHeight : defocusHeight)
             var resizeIframe = function() {
                 editor.composer.iframe.style.height = (minimumHeight < editor.composer.element.scrollHeight ? editor.composer.element.scrollHeight : minimumHeight) + "px";
             }
-            
             var resetIframeSize = function() {
-                editor.composer.iframe.style.height = minimumHeight + "px";
+                editor.composer.iframe.style.height = defocusHeight + "px";
             }
 
             editor.on("load", function() {
