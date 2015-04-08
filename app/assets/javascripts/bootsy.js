@@ -7,6 +7,7 @@
 //= require bootsy/init
 //= require bootsy/editor_options
 //= require bootsy/translations
+//= require bootsy/wysihtml5-resize
 
 
 window.BootsyFileupload = window.BootsyFileupload || {};
