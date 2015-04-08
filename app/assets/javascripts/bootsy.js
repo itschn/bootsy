@@ -7,6 +7,7 @@
 //= require bootsy/init
 //= require bootsy/editor_options
 //= require bootsy/translations
+//= require underscore
 //= require bootsy/wysihtml5-resize
 
 
